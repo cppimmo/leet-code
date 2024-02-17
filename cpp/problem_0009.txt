@@ -1,0 +1,28 @@
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+class Solution
+{
+public:
+    bool isPalindrome(int x)
+    {
+        auto digitVec = [=]() mutable -> std::vector<int>
+        {
+            std::vector<int> result;
+            while (x > 0)
+            {
+                int digit = x % 10;
+                result.push_back(digit);
+                x /= 10;
+            }
+            return result;
+        };
+        // Negative number can not be a palindrome?
+        if (std::signbit(x))
+            return false;
+
+        auto digits = digitVec();
+        return std::equal(digits.begin(), digits.end(), digits.rbegin());
+    }
+};
