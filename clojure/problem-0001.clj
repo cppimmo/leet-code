@@ -11,7 +11,8 @@
 (defn two-sum [nums target]
   (loop [idx     0
          indexes (->> nums     ; Indexes map contains k: num, v: index
-                      (map-indexed (fn [& args] (vec (reverse args))))
+                      ; map-indexed f has the args: [idx item]
+                      (map-indexed (fn [& args] (vec (reverse args)))) ; Swap the args
                       (reduce merge {}))]
     (if (>= idx (count nums))
       nil ; No summation of two elements equals target
