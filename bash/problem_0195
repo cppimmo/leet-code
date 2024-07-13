@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+FILENAME=problem_0195_file.txt
+LINE_COUNT=$(wc -l $FILENAME | cut --delimiter=' ' --fields=1)
+
+if [ $LINE_COUNT -lt 10 ]; then
+  #>&2 echo "Not enough lines in $FILENAME"
+  exit 1
+fi
+
+cat $FILENAME | head -n 10 | tail -n 1
