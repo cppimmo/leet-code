@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+FILENAME=problem_0195_file.txt
+NAMES=
+AGES=
+
+tail -n +1 $FILENAME | while read line || [[ -n $line ]];
+do
+  
+done
