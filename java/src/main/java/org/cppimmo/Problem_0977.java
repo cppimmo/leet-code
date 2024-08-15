@@ -15,5 +15,6 @@ class Solution {
             }
         }
         return squares;
+        /* return Arrays.stream(nums).map(num -> num * num).sorted().toArray(); */
     }
 }
