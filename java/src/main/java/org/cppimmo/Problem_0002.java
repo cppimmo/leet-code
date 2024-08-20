@@ -11,7 +11,8 @@
 import java.math.BigInteger;
 
 class Solution {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+	// Brute force solution
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
         return numberToList(listToNumber(l1).add(listToNumber(l2)));
     }
 
@@ -40,5 +41,36 @@ class Solution {
             }
         }
         return head;
+    }
+	// Faster solution
+	public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        // Return the non-null node or null (if both are null)
+        if (l1 == null || l2 == null) {
+            return (l1 != null) ? l1 : l2;
+        }
+        // Create dummy to link the rest of the new list
+        ListNode dummy = new ListNode(), current = dummy;
+        int carryDigit = 0; // Store tenths-place digit
+        // Continue while either l1 or l2 have remaining nodes
+        while (l1 != null || l2 != null) {
+            // Retrieve the digits from the current l1/l2 nodes
+            final int digit1 = (l1 != null) ? l1.val : 0;
+            final int digit2 = (l2 != null) ? l2.val : 0;
+
+            int sum = digit1 + digit2 + carryDigit;
+            carryDigit = sum / 10; // Calculate new carry digit
+            sum %= 10;
+            current.next = new ListNode(sum); // Create the new digit node
+
+            current = current.next; // Advance to prepare next digit node
+            // Advance the two lists, or leave them as null
+            l1 = (l1 != null) ? l1.next : null;
+            l2 = (l2 != null) ? l2.next : null;
+        }
+        // If there is still a remaining carry digit, add it as a new node
+        if (carryDigit != 0) {
+            current.next = new ListNode(carryDigit);
+        }
+        return dummy.next; // Return past the dummy node
     }
 }
