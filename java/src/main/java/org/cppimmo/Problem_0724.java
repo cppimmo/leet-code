@@ -1,5 +1,5 @@
 class Solution {
-    public int pivotIndex(int[] nums) {
+    public int pivotIndex1(int[] nums) {
         final int n = nums.length;
         if (n == 0) {
             return -1;
@@ -19,6 +19,26 @@ class Solution {
             // Return i if the left sum before and the right sum past the index are equal
             if (leftSums[i] == rightSums[i])
                 return i;
+        }
+        return -1; // No leftmost pivot index
+    }
+
+	public int pivotIndex2(int[] nums) {
+        final int n = nums.length;
+        if (n == 0) {
+            return -1;
+        }
+        int totalSum = 0, leftSum = 0;
+        for (int num : nums) {
+            totalSum += num;
+        }
+
+        for (int i = 0; i < n; i++) {
+            // Return i if the left sum before and the right sum past the index are equal
+            final int rightSum = totalSum - leftSum - nums[i];
+            if (leftSum == rightSum)
+                return i;
+            leftSum += nums[i];
         }
         return -1; // No leftmost pivot index
     }
