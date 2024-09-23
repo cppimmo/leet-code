@@ -35,4 +35,19 @@ public class Problem_0001 {
         // Return array of indices
         return new Integer[]{i1, i2};
     }
+
+	public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int numNeeded = target - nums[i];
+            //System.out.printf("%d - %d = %d\n", target, nums[i], numNeeded);
+            if (map.containsKey(numNeeded)) {
+                return new int[]{ map.get(numNeeded), i };
+            } else {
+                map.put(nums[i], i);
+                //System.out.printf("%d : %d\n", numNeeded, i);
+            }
+        }
+        return new int[]{};
+    }
 }
